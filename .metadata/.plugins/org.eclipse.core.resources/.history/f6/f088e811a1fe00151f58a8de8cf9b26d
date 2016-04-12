@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.control.Slider?>
+<?import javafx.scene.text.Text?>
+<VBox xmlns="http://javafx.com/javafx/2.2" xmlns:fx="http://javafx.com/fxml" stylesheets="@css/style.css"
+      fx:controller="at.swt6.driveanalytics.controller.DashboardController" >
+
+    <Slider fx:id="intervalSlider" showTickMarks="true" showTickLabels="true" snapToTicks="true"
+            majorTickUnit="1000"
+            blockIncrement="1000"
+            value="1000"
+            min="0"
+            max="10000" />
+    <VBox fx:id="widgetContainer" spacing="10" styleClass="widget-container" />
+</VBox>

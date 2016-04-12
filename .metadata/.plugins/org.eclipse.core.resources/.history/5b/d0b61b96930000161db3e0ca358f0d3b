@@ -1,0 +1,7 @@
+package at.swt6.driveanalytics.sensor.contracts;
+
+import org.osgi.util.tracker.ServiceTracker;
+
+public interface ISensorFactory {
+	ISensor createSensor();
+}

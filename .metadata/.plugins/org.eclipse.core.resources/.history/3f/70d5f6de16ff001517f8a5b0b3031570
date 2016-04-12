@@ -1,0 +1,20 @@
+package at.swt6.driveanalytics.dashboard.components;
+
+import javafx.scene.layout.VBox;
+
+import java.nio.ByteBuffer;
+
+import at.swt6.driveanalytics.sensor.contracts.ISensor;
+
+public abstract class AbstractSensorComponent<T> extends VBox {
+	protected ISensor sensor;
+	
+	protected abstract void setCurrentValue(ByteBuffer value);
+	
+	public abstract void setSensor(ISensor sensor);
+	
+	public void refresh() {
+		ByteBuffer buffer = ByteBuffer.wrap(sensor.getData());
+		setCurrentValue(buffer);
+	}
+}

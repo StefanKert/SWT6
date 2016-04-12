@@ -1,0 +1,35 @@
+package at.swt6.driveanalytics.dashboard.components;
+
+import java.nio.ByteBuffer;
+
+import at.swt6.driveanalytics.sensor.contracts.ISensor;
+import javafx.scene.text.Text;
+
+public class FloatSensorComponent extends AbstractSensorComponent<Double> {
+	private ISensor sensor;
+	private Text valueText;
+	private Text sensorNameText;
+
+	public FloatSensorComponent() {
+		this.sensorNameText = new Text();
+		this.valueText = new Text();
+		this.getChildren().addAll(this.sensorNameText, this.valueText);
+	}
+	
+	@Override
+	public void setSensor(ISensor sensor) {
+		this.sensor = sensor;
+		this.setId(sensor.getSensorId());
+	}
+
+	@Override
+	public void refresh() {
+		ByteBuffer buffer = ByteBuffer.wrap(sensor.getData());
+		this.valueText.setText(String.valueOf(buffer.getDouble()));
+	}
+
+	@Override
+	protected void setCurrentValue(Double value) {
+		this.valueText.setText(String.valueOf(value));
+	}
+}

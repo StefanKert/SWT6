@@ -1,0 +1,11 @@
+package at.swt6.drive.analytics.sensor.humidity;
+
+import at.swt6.driveanalytics.sensor.contracts.ISensor;
+import at.swt6.driveanalytics.sensor.contracts.ISensorFactory;
+
+public class HumiditySensorFactory implements ISensorFactory {
+	@Override
+	public ISensor createSensor() {
+		return new HumiditySensor();
+	}
+}

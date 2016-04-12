@@ -1,0 +1,102 @@
+package at.swt6.drive.analytics.dashboard;
+
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Timer;
+
+import at.swt6.drive.analytics.sensor.contracts.ISensor;
+import at.swt6.drive.analytics.sensor.contracts.ISensor.SensorDataFormat;
+import at.swt6.drive.analytics.sensor.contracts.ISensorFactory;
+
+public class DashboardWindow {
+	private List<EventHandler<WindowEvent>> onCloseHandlers = new ArrayList<>();
+	private static final String DEFAULT_INTERVAL = "500";
+
+	private Timer timer;
+	private Stage stage;
+	private VBox rootPane;
+	private VBox sensorPane;
+	private HBox controlPane;
+	private List<ISensor> sensors;
+	
+	public DashboardWindow(){
+		sensors = new ArrayList<ISensor>();
+		controlPane = new HBox();
+		controlPane.setAlignment(Pos.TOP_CENTER);
+		controlPane.setPadding(new Insets(10));
+		sensorPane = new VBox();
+		rootPane = new VBox(controlPane, sensorPane);
+	}
+	
+	public void removeSensorFactory(ISensorFactory factory) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	public void addSensorFactory(ISensorFactory factory) {
+		// TODO Auto-generated method stub
+		
+	}
+	public void show() {
+		if (stage == null) {
+			stage = new Stage();
+			stage.setScene(new Scene(rootPane, 500, 500));
+			stage.setMinWidth(250);
+			stage.setMinHeight(250);
+			stage.setOnCloseRequest(evt -> {
+				onCloseHandlers.forEach(h -> h.handle(evt));
+			});
+			stage.setTitle("Drive Analytics Dashboard");
+		}
+		stage.show();
+	}
+
+	public void close() {
+		if (stage != null)
+			stage.close();
+	}
+
+
+	public void addOnCloseEventHandler(EventHandler<WindowEvent> event) {
+		onCloseHandlers.add(event);
+	}
+	
+	public void removeOnCloseEventHandler(EventHandler<WindowEvent> event) {
+		onCloseHandlers.remove(event);
+	}
+
+	public void addSensor(ISensor sensor){
+		VBox box = new VBox();
+		box.setAlignment(Pos.TOP_CENTER);
+		box.setPadding(new Insets(10));
+		box.setUserData(sensor);
+		
+		Text txtName = new Text(sensor.getSensorId());
+		txtName.setFont(Font.font("Verdana", 20));
+		box.getChildren().add(txtName);
+		
+		if(sensor.getDataFormat() == SensorDataFormat.ABSOLUTE_VALUE_LONG){
+			Text txtValue = new Text("Absolut Value");
+			box.getChildren().add(txtValue);
+		}else if(sensor.getDataFormat() == SensorDataFormat.PERCENT){
+			Text txtValue = new Text("Percent Value");
+			box.getChildren().add(txtValue);
+		}
+		sensorPane.getChildren().add(box);
+	}
+	
+	public void removeSensor(ISensor sensor){
+		sensorPane.getChildren().remove(sensor);
+	}
+}

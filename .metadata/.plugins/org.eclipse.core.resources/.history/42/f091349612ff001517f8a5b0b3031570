@@ -1,0 +1,19 @@
+package at.swt6.driveanalytics.dashboard.components;
+
+import java.nio.ByteBuffer;
+
+import at.swt6.driveanalytics.sensor.contracts.ISensor;
+
+public class FloatSensorComponent extends SensorComponent {
+	private ISensor sensor;
+
+	@Override
+	public void setSensor(ISensor sensor) {
+		this.sensor = sensor;
+	}
+	
+	@Override
+	public void refresh(){
+        ByteBuffer buffer = ByteBuffer.wrap(sensor.getData());
+	}
+}

@@ -1,0 +1,27 @@
+package at.swt6.driveanalytics.sensor.distance;
+
+import at.swt6.driveanalytics.sensor.contracts.*;
+
+public class DistanceSensor implements ISensor {
+
+	@Override
+	public byte[] getData() {
+		// TODO Auto-generated method stub
+		return new byte[];
+	}
+
+	@Override
+	public SensorDataFormat getDataFormat() {
+		return SensorDataFormat.ABSOLUTE_VALUE_LONG;
+	}
+
+	@Override
+	public String getSensorId() {
+		return "a0ce5db6-3c96-4162-8e34-49d157375eda";
+	}
+
+	@Override
+	public String getSensorName() {
+		return "Distance Sensor";
+	}
+}

@@ -1,0 +1,14 @@
+package at.swt6.driveanalytics.dashboard.components;
+
+import javafx.scene.layout.VBox;
+
+import at.swt6.driveanalytics.sensor.contracts.ISensor;
+
+public abstract class SensorComponent extends VBox {
+	protected ISensor sensor;
+	
+	public abstract void setSensor(ISensor sensor);
+	
+	public abstract void refresh();
+
+}

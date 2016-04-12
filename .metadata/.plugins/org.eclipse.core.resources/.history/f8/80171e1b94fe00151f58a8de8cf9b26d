@@ -1,0 +1,29 @@
+package at.swt6.drive.analytics.sensor.humidity;
+
+import java.nio.ByteBuffer;
+import java.util.concurrent.ThreadLocalRandom;
+
+import at.swt6.driveanalytics.sensor.contracts.*;
+
+public class HumiditySensor implements ISensor {
+	@Override
+	public byte[] getData() {
+		double random = ThreadLocalRandom.current().nextDouble(0, 1);
+		return ByteBuffer.allocate(Double.SIZE / Byte.SIZE).putDouble(random).array();
+	}
+
+	@Override
+	public SensorDataFormat getDataFormat() {
+		return SensorDataFormat.PERCENT;
+	}
+
+	@Override
+	public String getSensorId() {
+		return "58e8286e-e4e0-48bb-b389-468173125531";
+	}
+	
+	@Override
+	public String getSensorName() {
+		return "Humidity Sensor";
+	}
+}

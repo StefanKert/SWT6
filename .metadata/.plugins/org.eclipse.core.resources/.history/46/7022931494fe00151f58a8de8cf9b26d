@@ -1,0 +1,5 @@
+package at.swt6.drive.analytics.sensor.contracts;
+
+public interface ISensorListener {
+	public void valueChanged(ISensor sensor);
+}

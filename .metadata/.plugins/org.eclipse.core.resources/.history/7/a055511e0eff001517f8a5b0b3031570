@@ -1,0 +1,68 @@
+package at.swt6.driveanalytics.dashboard;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.control.Slider;
+import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
+
+public class DashboardWindow {
+	private Stage stage;
+	private List<EventHandler<WindowEvent>> onCloseHandlers = new ArrayList<>();
+	private DashboardController controller;
+	private VBox rootPane;
+	
+	public DashboardWindow(DashboardController controller){
+		this.controller = controller;
+		
+		
+		rootPane = new VBox();
+		Slider slider = new Slider();
+		slider.showTickLabelsProperty().set(true);
+		slider.snapToTicksProperty().set(true);
+		slider.majorTickUnitProperty().set(1000);
+		slider.blockIncrementProperty().set(1000);
+		slider.valueProperty().set(1000);
+		slider.minProperty().set(0);
+		slider.maxProperty().set(1000);
+		this.controller.setIntervalSlider(slider);
+		rootPane.getChildren().add(slider);
+		
+		VBox componentContainer = new VBox();
+		componentContainer.setSpacing(10);
+		this.controller.setComponentContainer(componentContainer);
+		rootPane.getChildren().add(componentContainer);
+	}
+	
+	public void show() {
+		if (stage == null) {
+			stage = new Stage();
+			stage.setScene(new Scene(rootPane, 500, 500));
+			stage.setMinWidth(250);
+			stage.setMinHeight(250);
+			stage.setOnCloseRequest(evt -> {
+				onCloseHandlers.forEach(h -> h.handle(evt));
+			});
+			stage.setTitle("Drive Analytics Dashboard App");
+		}
+		stage.show();
+	}
+
+	public void close() {
+		if (stage != null)
+			stage.close();
+	}
+
+
+	public void addOnCloseEventHandler(EventHandler<WindowEvent> event) {
+		onCloseHandlers.add(event);
+	}
+	
+	public void removeOnCloseEventHandler(EventHandler<WindowEvent> event) {
+		onCloseHandlers.remove(event);
+	}
+}

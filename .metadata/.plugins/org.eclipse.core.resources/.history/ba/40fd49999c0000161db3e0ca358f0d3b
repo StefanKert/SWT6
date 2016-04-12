@@ -1,0 +1,38 @@
+package at.swt6.driveanalytics.dashboard.components;
+
+import java.nio.ByteBuffer;
+
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+
+public class DiscretValueSensorComponent extends AbstractSensorComponent {
+	private Text valueText;
+	private Text sensorNameText;
+
+	public DiscretValueSensorComponent() {
+		this.sensorNameText = new Text();
+		this.sensorNameText.setFont(new Font(15));
+		this.sensorNameText.setTextAlignment(TextAlignment.CENTER);
+		HBox.setHgrow(this.sensorNameText, Priority.ALWAYS);
+		VBox.setVgrow(this.sensorNameText, Priority.ALWAYS);
+		this.valueText = new Text();
+		this.valueText.setFont(new Font(20));
+		HBox.setHgrow(this.valueText, Priority.ALWAYS);
+		VBox.setVgrow(this.valueText, Priority.ALWAYS);
+		this.getChildren().addAll(this.sensorNameText, this.valueText);
+	}
+	
+	@Override
+	protected void setName(String name) {
+		this.sensorNameText.setText(name);
+	}
+
+	@Override
+	protected void setCurrentValue(ByteBuffer value) {
+		this.valueText.setText(String.valueOf(value.getLong()));
+	}
+}

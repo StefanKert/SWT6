@@ -1,0 +1,56 @@
+package at.swt6.driveanalytics.sensor.humidity;
+
+import java.nio.ByteBuffer;
+import java.util.concurrent.ThreadLocalRandom;
+
+import org.osgi.util.tracker.ServiceTracker;
+
+import at.swt6.driveanalytics.sensor.contracts.*;
+import at.swt6.driveanalytics.utils.Timer;
+
+public class HumiditySensor implements ISensor {
+	private ServiceTracker<ISensorListener, ISensorListener> listenerServiceTracker;
+	private Timer timer;
+
+	public HumiditySensor(ServiceTracker<ISensorListener, ISensorListener> listenerTracker) {
+		this.listenerServiceTracker = listenerTracker;
+		timer = new Timer();
+		timer.setInterval(1000);
+		timer.addTimerListener((x) -> {
+			valueChanged();
+		});
+		timer.start();
+	}
+
+	@Override
+	public byte[] getData() {
+		double random = ThreadLocalRandom.current().nextDouble(0, 1);
+		return ByteBuffer.allocate(Double.SIZE / Byte.SIZE).putDouble(random).array();
+	}
+
+	@Override
+	public SensorDataFormat getDataFormat() {
+		return SensorDataFormat.PERCENT;
+	}
+
+	@Override
+	public String getSensorId() {
+		return "58e8286e-e4e0-48bb-b389-468173125531";
+	}
+
+	@Override
+	public String getSensorName() {
+		return "Humidity Sensor";
+	}
+
+	private void valueChanged() {
+		Object[] listeners = listenerServiceTracker.getServices();
+		if (listeners == null || listeners.length == 0)
+			return;
+		for (Object listener : listeners) {
+			if (listener instanceof ISensorListener) {
+				((ISensorListener) listener).valueChanged(this);
+			}
+		}
+	}
+}

@@ -1,0 +1,65 @@
+package at.swt6.driveanalytics.dashboard;
+
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+import org.osgi.util.tracker.ServiceTrackerCustomizer;
+
+import at.swt6.drive.analytics.dashboard.utils.JavaFxUtils;
+import at.swt6.driveanalytics.sensor.contracts.ISensorFactory;
+
+public class SensorTrackerCustomizer implements ServiceTrackerCustomizer<ISensorFactory, ISensorFactory> {
+
+	private static enum Action {
+		ADDED, MODIFIED, REMOVED
+	}
+
+	private BundleContext context;
+	private DashboardController controller;
+
+	public SensorTrackerCustomizer(BundleContext context, DashboardController controller) {
+		this.context = context;
+		this.controller = controller;
+	}
+
+	@Override
+	public ISensorFactory addingService(ServiceReference<ISensorFactory> serviceReference) {
+		ISensorFactory factory = context.getService(serviceReference);
+		processEventInUIThread(Action.ADDED, serviceReference, factory);
+		return factory;
+	}
+
+	@Override
+	public void modifiedService(ServiceReference<ISensorFactory> serviceReference, ISensorFactory factory) {
+		processEventInUIThread(Action.MODIFIED, serviceReference, factory);
+	}
+
+	@Override
+	public void removedService(ServiceReference<ISensorFactory> serviceReference, ISensorFactory factory) {
+		processEventInUIThread(Action.REMOVED, serviceReference, factory);
+	}
+
+	private void processEventInUIThread(final Action action, final ServiceReference<ISensorFactory> serviceReference,
+			final ISensorFactory factory) {
+		try {
+			JavaFxUtils.runAndWait(() -> processEvent(action, serviceReference, factory));
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	private void processEvent(Action action, ServiceReference<ISensorFactory> serviceReference,
+			ISensorFactory factory) {
+		switch (action) {
+			case MODIFIED:
+				controller.removeSensorFactory(factory);
+				controller.addSensorFactory(factory);
+			case ADDED:
+				controller.addSensorFactory(factory);
+				break;
+			case REMOVED:
+				controller.removeSensorFactory(factory);
+				break;
+		}
+	}
+
+}

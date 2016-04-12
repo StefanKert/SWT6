@@ -1,0 +1,49 @@
+package at.swt6.driveanalytics.dashboard;
+
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+import org.osgi.util.tracker.ServiceTrackerCustomizer;
+
+import at.swt6.driveanalytics.sensor.contracts.ISensor;
+import at.swt6.driveanalytics.sensor.contracts.ISensorFactory;
+
+public class SensorTrackerCustomizer implements ServiceTrackerCustomizer<ISensorFactory, ISensorFactory> {
+	private BundleContext context;
+	private DashboardWindow window;
+
+	public SensorTrackerCustomizer(BundleContext context, DashboardWindow window) {
+		this.context = context;
+		this.window = window;
+	}
+
+	@Override
+	public ISensorFactory addingService(ServiceReference<ISensorFactory> serviceReference) {
+		ISensorFactory factory = context.getService(serviceReference);
+		ISensor sensor = factory.createSensor();
+		JavaFxUtils.processEventInUIThread(() -> window.addSensor(sensor));
+		return factory;
+	}
+
+	@Override
+	public void modifiedService(ServiceReference<ISensorFactory> serviceReference, ISensorFactory factory) {
+		ISensor sensor = factory.createSensor();
+		JavaFxUtils.processEventInUIThread(() -> {
+			window.removeSensor(sensor);
+			window.addSensor(sensor);
+		});
+	}
+
+	@Override
+	public void removedService(ServiceReference<ISensorFactory> serviceReference, ISensorFactory factory) {
+		ISensor sensor = factory.createSensor();
+		JavaFxUtils.processEventInUIThread(() -> {
+			window.removeSensor(sensor);
+			try {
+				serviceReference.getBundle().stop();
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+				e.printStackTrace();
+			}
+		});
+	}
+}

@@ -1,0 +1,43 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<parent>
+		<groupId>swt6-drive-analytics</groupId>
+		<artifactId>drive-analytics-dashboard</artifactId>
+		<version>1.0</version>
+	</parent>
+
+	<artifactId>drive-analytics-sensor-contracts</artifactId>
+	<packaging>bundle</packaging>
+
+	<properties>
+		<maven.compiler.target>1.8</maven.compiler.target>
+		<maven.compiler.source>1.8</maven.compiler.source>
+	</properties>
+
+	<build>
+		<plugins>
+			<plugin>
+				<groupId>org.apache.felix</groupId>
+				<artifactId>maven-bundle-plugin</artifactId>
+
+				<configuration>
+					<instructions>
+						<Export-Package>
+							at.swt6.drive.analytics.sensor.contracts;version="1.0",
+						</Export-Package>
+						<Import-Package>
+							org.osgi.framework;version="[1.3,2.0)",
+							org.osgi.util.tracker;version="[1.3,2.0)",
+							javafx.*
+						</Import-Package>
+					</instructions>
+				</configuration>
+			</plugin>
+
+			<plugin>
+				<artifactId>maven-antrun-plugin</artifactId>
+			</plugin>
+		</plugins>
+	</build>
+</project>

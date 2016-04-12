@@ -1,0 +1,11 @@
+package at.swt6.drive.analytics.sensor.distance;
+
+import at.swt6.drive.analytics.sensor.contracts.ISensor;
+import at.swt6.drive.analytics.sensor.contracts.ISensorFactory;
+
+public class DistanceSensorFactory implements ISensorFactory {
+	@Override
+	public ISensor createSensor() {
+		return new DistanceSensor();
+	}
+}

@@ -1,0 +1,12 @@
+import at.swt6.driveanalytics.sensor.contracts.ISensor;
+import at.swt6.driveanalytics.sensor.contracts.ISensorListener;
+
+public class SensorListener implements ISensorListener {
+
+	@Override
+	public void valueChanged(ISensor sensor) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

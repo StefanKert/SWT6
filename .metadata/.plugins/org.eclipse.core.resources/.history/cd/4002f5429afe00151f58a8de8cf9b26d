@@ -1,0 +1,46 @@
+package at.swt6.driveanalytics.dashboard.components;
+import java.io.IOException;
+import java.nio.ByteBuffer;
+
+import at.swt6.driveanalytics.sensor.contracts.ISensor;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.text.Text;
+
+public class PercentageSensorComponent extends SensorComponent {
+	private ISensor sensor;	
+    @FXML private ProgressIndicator progressIndicator;
+    @FXML private Text sensorNameText;
+
+    public PercentageSensorComponent() {
+        FXMLLoader fxmlLoader = new FXMLLoader(getClass().getResource(
+                "/PercentSensorWidget.fxml"));
+        fxmlLoader.setRoot(this);
+        fxmlLoader.setController(this);
+
+        try {
+            fxmlLoader.load();
+        } catch (IOException exception) {
+            throw new RuntimeException(exception);
+        }
+    }
+
+    public void setName(String name) {
+        sensorNameText.setText(name);
+    }
+
+    public void setProgress(double progress) {
+        progressIndicator.progressProperty().set(progress);
+    }
+	
+	@Override
+	public void setSensor(ISensor sensor) {
+		this.sensor = sensor;
+	}
+	
+	@Override
+	public void refresh(){
+        ByteBuffer buffer = ByteBuffer.wrap(sensor.getData());
+	}
+}

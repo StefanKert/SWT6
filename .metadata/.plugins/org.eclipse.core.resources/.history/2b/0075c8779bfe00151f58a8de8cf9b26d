@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+
+<fx:root styleClass="widget" stylesheets="@css/style.css"
+         type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+	<HBox alignment="BASELINE_CENTER">
+		<Text fx:id="sensorNameText" text="" styleClass="widget-header" />
+		<VBox.margin>
+			<Insets bottom="15" />
+		</VBox.margin>
+	</HBox>
+	<HBox alignment="BASELINE_CENTER">
+		<Text fx:id="valueText" styleClass="widget-value" />
+	</HBox>
+</fx:root>

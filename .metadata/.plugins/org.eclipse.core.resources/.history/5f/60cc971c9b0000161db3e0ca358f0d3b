@@ -1,0 +1,24 @@
+package at.swt6.driveanalytics.dashboard;
+import java.nio.ByteBuffer;
+
+import at.swt6.driveanalytics.sensor.contracts.ISensor;
+import at.swt6.driveanalytics.sensor.contracts.ISensorListener;
+
+public class SensorListener implements ISensorListener {
+    @Override
+    public void valueChanged(ISensor sensor) {
+
+        Object value = null;
+        ByteBuffer buffer = ByteBuffer.wrap(sensor.getData());
+        switch (sensor.getDataFormat()) {
+            case ABSOLUTE_VALUE_LONG:
+                value = buffer.getLong();
+                break;
+
+            case PERCENT:
+                value = buffer.getDouble();
+                break;
+        }
+        System.out.println(sensor.getSensorName() + " changed its value to " + value);
+    }    
+}

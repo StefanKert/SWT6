@@ -1,0 +1,5 @@
+package at.swt6.driveanalytics.dashboard;
+
+public interface ISensorComponent {
+	public void addSensor(ISensor sensor);
+}

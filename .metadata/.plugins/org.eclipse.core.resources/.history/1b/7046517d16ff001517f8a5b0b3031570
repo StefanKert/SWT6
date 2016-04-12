@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.layout.VBox?>
+
+<fx:root type="javafx.scene.layout.VBox" xmlns="http://javafx.com/javafx/2.2" xmlns:fx="http://javafx.com/fxml" >
+	<HBox alignment="BASELINE_CENTER">
+		<Text fx:id="sensorNameText" text="" styleClass="widget-header" />
+		<VBox.margin>
+			<Insets bottom="15" />
+		</VBox.margin>
+	</HBox>
+	<ProgressIndicator fx:id="progressIndicator"
+		prefHeight="200" progress="0" styleClass="widget-indicator" />
+</fx:root>

@@ -1,0 +1,17 @@
+package at.swt6.drive.analytics.sensor.distance;
+
+import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
+
+import at.swt6.drive.analytics.sensor.contracts.ISensorFactory;
+
+public class DistanceSensorActivator implements BundleActivator {
+	@Override
+	public void start(BundleContext context) throws Exception {		
+		context.registerService(ISensorFactory.class, new DistanceSensorFactory(), null);
+	}
+
+	@Override
+	public void stop(BundleContext context) throws Exception {
+	}
+}

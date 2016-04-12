@@ -1,0 +1,13 @@
+package at.swt6.driveanalytics.dashboard.components;
+
+import at.swt6.driveanalytics.dashboard.ISensorComponent;
+import at.swt6.driveanalytics.sensor.contracts.ISensor;
+
+public class FloatSensorComponent implements ISensorComponent {
+	private ISensor sensor;
+
+	@Override
+	public void setSensor(ISensor sensor) {
+		this.sensor = sensor;
+	}
+}

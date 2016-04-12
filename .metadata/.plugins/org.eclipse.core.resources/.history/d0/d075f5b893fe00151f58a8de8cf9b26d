@@ -1,0 +1,65 @@
+package at.swt6.drive.analytics.dashboard;
+
+import org.osgi.framework.BundleContext;
+import org.osgi.framework.ServiceReference;
+import org.osgi.util.tracker.ServiceTrackerCustomizer;
+
+import at.swt6.drive.analytics.dashboard.utils.JavaFxUtils;
+import at.swt6.drive.analytics.sensor.contracts.ISensorFactory;
+
+public class SensorTrackerCustomizer implements ServiceTrackerCustomizer<ISensorFactory, ISensorFactory> {
+
+	private static enum Action {
+		ADDED, MODIFIED, REMOVED
+	}
+
+	private BundleContext context;
+	private DashboardWindow window;
+
+	public SensorTrackerCustomizer(BundleContext context, DashboardWindow window) {
+		this.context = context;
+		this.window = window;
+	}
+
+	@Override
+	public ISensorFactory addingService(ServiceReference<ISensorFactory> serviceReference) {
+		ISensorFactory factory = context.getService(serviceReference);
+		processEventInUIThread(Action.ADDED, serviceReference, factory);
+		return factory;
+	}
+
+	@Override
+	public void modifiedService(ServiceReference<ISensorFactory> serviceReference, ISensorFactory factory) {
+		processEventInUIThread(Action.MODIFIED, serviceReference, factory);
+	}
+
+	@Override
+	public void removedService(ServiceReference<ISensorFactory> serviceReference, ISensorFactory factory) {
+		processEventInUIThread(Action.REMOVED, serviceReference, factory);
+	}
+
+	private void processEventInUIThread(final Action action, final ServiceReference<ISensorFactory> serviceReference,
+			final ISensorFactory factory) {
+		try {
+			JavaFxUtils.runAndWait(() -> processEvent(action, serviceReference, factory));
+		} catch (Exception ex) {
+			ex.printStackTrace();
+		}
+	}
+
+	private void processEvent(Action action, ServiceReference<ISensorFactory> serviceReference,
+			ISensorFactory factory) {
+		switch (action) {
+			case MODIFIED:
+				window.removeSensorFactory(factory);
+				window.addSensorFactory(factory);
+			case ADDED:
+				window.addSensorFactory(factory);
+				break;
+			case REMOVED:
+				window.removeSensorFactory(factory);
+				break;
+		}
+	}
+
+}

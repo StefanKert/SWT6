@@ -1,0 +1,17 @@
+package at.swt6.drive.analytics.sensor.humidity;
+
+import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
+
+import at.swt6.drive.analytics.sensor.contracts.ISensorFactory;
+
+public class HumiditySensorActivator implements BundleActivator {
+	@Override
+	public void start(BundleContext context) throws Exception {		
+		context.registerService(ISensorFactory.class, new HumiditySensorFactory(), null);
+	}
+
+	@Override
+	public void stop(BundleContext context) throws Exception {
+	}
+}

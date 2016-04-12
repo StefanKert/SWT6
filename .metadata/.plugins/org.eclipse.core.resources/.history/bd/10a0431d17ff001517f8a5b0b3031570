@@ -1,0 +1,34 @@
+package at.swt6.driveanalytics.dashboard.components;
+
+import java.nio.ByteBuffer;
+
+import at.swt6.driveanalytics.sensor.contracts.ISensor;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.text.Text;
+
+public class PercentageSensorComponent extends AbstractSensorComponent {
+	private ISensor sensor;
+	private ProgressIndicator progressIndicator;
+	private Text sensorNameText;
+
+	public PercentageSensorComponent() {
+		this.sensorNameText = new Text();
+		this.progressIndicator = new ProgressIndicator();
+		this.progressIndicator.prefHeight(200);
+		this.progressIndicator.setProgress(0);
+		this.getChildren().addAll(this.sensorNameText, this.progressIndicator);
+	}
+
+	@Override
+	public void setSensor(ISensor sensor) {
+		this.sensor = sensor;
+		sensorNameText.setText(sensor.getSensorName());
+		this.setId(sensor.getSensorId());
+	}
+
+	@Override
+	public void refresh() {
+		ByteBuffer buffer = ByteBuffer.wrap(sensor.getData());
+		progressIndicator.progressProperty().set(buffer.getDouble());
+	}
+}

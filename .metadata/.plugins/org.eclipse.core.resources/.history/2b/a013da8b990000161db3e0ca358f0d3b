@@ -1,0 +1,43 @@
+package at.swt6.driveanalytics.dashboard.components;
+
+import java.nio.ByteBuffer;
+
+import javafx.geometry.Insets;
+import javafx.scene.control.ProgressIndicator;
+import javafx.scene.layout.Border;
+import javafx.scene.layout.BorderStroke;
+import javafx.scene.layout.HBox;
+import javafx.scene.layout.Priority;
+import javafx.scene.layout.VBox;
+import javafx.scene.paint.Paint;
+import javafx.scene.text.Font;
+import javafx.scene.text.Text;
+import javafx.scene.text.TextAlignment;
+
+public class PercentageSensorComponent extends AbstractSensorComponent {
+	private ProgressIndicator progressIndicator;
+	private Text sensorNameText;
+
+	public PercentageSensorComponent() {
+		this.sensorNameText = new Text();
+		this.sensorNameText.setFont(new Font(20));
+		HBox.setHgrow(this.sensorNameText, Priority.ALWAYS);
+		VBox.setVgrow(this.sensorNameText, Priority.ALWAYS);
+		this.progressIndicator = new ProgressIndicator();
+		this.progressIndicator.prefHeight(200);
+		this.progressIndicator.setProgress(0);
+		HBox.setHgrow(this.progressIndicator, Priority.ALWAYS);
+		VBox.setVgrow(this.progressIndicator, Priority.ALWAYS);
+		this.getChildren().addAll(this.sensorNameText, this.progressIndicator);
+	}
+
+	@Override
+	protected void setCurrentValue(ByteBuffer buffer) {
+		progressIndicator.progressProperty().set(buffer.getDouble());
+	}
+
+	@Override
+	protected void setName(String name) {
+		sensorNameText.setText(name);		
+	}
+}

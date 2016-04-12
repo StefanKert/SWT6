@@ -1,0 +1,49 @@
+package at.swt6.driveanalytics.dashboard;
+
+import org.osgi.framework.BundleActivator;
+import org.osgi.framework.BundleContext;
+import org.osgi.util.tracker.ServiceTracker;
+
+import at.swt6.driveanalytics.sensor.contracts.ISensorFactory;
+
+public class DashboardActivator implements BundleActivator {
+	private DashboardController dashboardController;
+	private DashboardWindow dashboardWindow;
+	private ServiceTracker<ISensorFactory, ISensorFactory> sensorTracker;
+
+	@Override
+	public void start(BundleContext context) throws Exception {
+		context.registerService(SensorListener.class, new SensorListener(), null);
+		JavaFxUtils.initJavaFx();
+		dashboardController = new DashboardController();
+		dashboardWindow = new DashboardWindow(dashboardController);
+		JavaFxUtils.runAndWait(() -> startUI(context));
+
+		sensorTracker = new ServiceTracker<>(context, ISensorFactory.class,
+				new SensorTrackerCustomizer(context, dashboardController));
+		sensorTracker.open();
+	}
+
+	@Override
+	public void stop(BundleContext context) throws Exception {
+		JavaFxUtils.runAndWait(() -> stopUI(context));
+		sensorTracker.close();
+	}
+
+	private void startUI(BundleContext context) {
+		dashboardWindow.show();
+		dashboardWindow.addOnCloseEventHandler(evt -> {
+			try {
+				context.getBundle().stop();
+				stopUI(context);
+			} catch (Exception ex) {
+				ex.printStackTrace();
+			}
+		});
+	}
+
+	private void stopUI(BundleContext context) {
+		dashboardController.stop();
+		dashboardWindow.close();
+	}
+}

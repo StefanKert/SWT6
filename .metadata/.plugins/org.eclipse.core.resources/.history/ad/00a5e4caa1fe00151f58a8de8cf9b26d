@@ -1,0 +1,107 @@
+package at.swt6.driveanalytics.dashboard;
+
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ResourceBundle;
+
+import at.swt6.drive.analytics.dashboard.utils.timer.Timer;
+import at.swt6.driveanalytics.dashboard.components.FloatSensorComponent;
+import at.swt6.driveanalytics.dashboard.components.PercentageSensorComponent;
+import at.swt6.driveanalytics.dashboard.components.SensorComponent;
+import at.swt6.driveanalytics.sensor.contracts.ISensor;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.Node;
+import javafx.scene.control.Slider;
+import javafx.scene.layout.VBox;
+
+public class DashboardController implements Initializable {
+
+    @FXML private VBox widgetContainer;
+    @FXML private Slider intervalSlider;
+
+    private List<ISensor> sensorList = new ArrayList<>();
+    private Timer timer;
+
+    @Override
+    public void initialize(URL location, ResourceBundle resources) {
+    	DashboardActivator.controllerInstance = this;
+      /*  timer = new Timer();
+        intervalSlider.valueProperty().setValue(1000);
+        //timer should refresh the widgets
+        timer.addTimerListener(x -> {
+            try {
+                JavaFxUtils.runLater(() -> updateWidgets());
+            }
+            catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        });
+
+        //bind interval slider to interval property
+        intervalSlider.valueProperty().addListener((arg0, arg1, arg2) -> {
+            timer.setInterval((int) intervalSlider.getValue());
+        });
+
+        timer.start();*/
+    }
+
+    /***
+     * Stops the timer
+     */
+    public void stop() {
+        timer.stop();
+    }
+
+    /***
+     * Updates the widget values
+     */
+    private void updateWidgets() {
+        for (ISensor sensor:sensorList) {
+            Node widget = getWidgetById(sensor.getSensorId());
+            ((SensorComponent) widget).refresh();
+        }
+    }
+
+    /***
+     * Finds the widget out of the widget container
+     * @param id
+     * @return
+     */
+    private Node getWidgetById(String id) {
+        return widgetContainer.getChildren().stream().filter(x -> x.getId().equals(id))
+                .findFirst().orElse(null);
+    }
+
+    /***
+     * Sensor tracker remove implementation
+     * @param sensor
+     */
+    public void removeSensor(ISensor sensor) {
+        Node node = getWidgetById(sensor.getSensorId());
+        if(node != null){
+            widgetContainer.getChildren().remove(node);
+        }
+        sensorList.remove(sensor);
+    }
+
+    /***
+     * Sensor tracker add implementation
+     * @param sensor
+     */
+    public void addSensor(ISensor sensor) {
+        sensorList.add(sensor);
+        SensorComponent sensorComponent = null;
+        switch (sensor.getDataFormat()) {
+            case PERCENT:
+            	sensorComponent = new PercentageSensorComponent();
+                break;
+            case ABSOLUTE_VALUE_LONG:
+            	sensorComponent = new FloatSensorComponent();
+                break;
+        }       
+        sensorComponent.setSensor(sensor);
+        widgetContainer.getChildren().add(sensorComponent);
+    }
+}

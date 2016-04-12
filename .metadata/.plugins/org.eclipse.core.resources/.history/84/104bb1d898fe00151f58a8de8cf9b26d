@@ -1,0 +1,7 @@
+package at.swt6.driveanalytics.dashboard.components;
+
+import at.swt6.driveanalytics.sensor.contracts.ISensor;
+
+public interface ISensorComponent implements VBox{
+	public void setSensor(ISensor sensor);
+}
