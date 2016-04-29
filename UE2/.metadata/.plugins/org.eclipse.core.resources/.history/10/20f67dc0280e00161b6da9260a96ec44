@@ -1,0 +1,11 @@
+package swt6.orm.data;
+
+import swt6.orm.domain.HibernateWorkLogManager;
+import swt6.orm.domain.WorkLogManager;
+
+public class JPAWorkLogManagerTest extends WorkLogManagerTest {
+	@Override
+	protected WorkLogManager getWorkLogManager(){
+		return new JPAWorkLogManagerTest();
+	}
+}

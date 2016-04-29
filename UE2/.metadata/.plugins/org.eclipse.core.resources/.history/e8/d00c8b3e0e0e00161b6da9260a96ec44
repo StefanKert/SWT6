@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="swt6.orm.domain">
+	<class name="Project">
+		<id name="id" type="long">
+			<column name="id" />
+			<generator class="native" />
+		</id>
+
+		<property name="name" />
+
+        <many-to-one name="leader" lazy="false" class="Employee" column="leader_id"
+                     not-null="true"/>
+
+		<set name="members"  lazy="false" table="ProjectEmployee" cascade="save-update">
+			<key column="project_id" />
+			<many-to-many class="Employee" column="employee_id" />
+		</set>
+		<set name="modules" inverse="true" lazy="false" fetch="join">
+			<key>
+				<column name="project_id" not-null="true" />
+			</key>
+			<one-to-many class="Module" />
+		</set>
+	</class>
+</hibernate-mapping>

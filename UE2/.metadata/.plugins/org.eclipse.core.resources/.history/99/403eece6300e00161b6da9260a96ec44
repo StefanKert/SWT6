@@ -1,0 +1,174 @@
+package swt6.orm.simple.hibernate;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Collection;
+import java.util.Date;
+
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import swt6.orm.data.hibernate.HibernateUtil;
+import swt6.orm.domain.models.Employee;
+
+public class HibernateEmployeeManager {
+
+  static String promptFor(BufferedReader in, String p) {
+    System.out.print(p + "> ");
+    try {
+      return in.readLine();
+    } catch (Exception e) {
+      return promptFor(in, p);
+    }
+  }
+
+  public static void saveEmployee(Employee empl) {
+    Session session = HibernateUtil.getCurrentSession();
+    Transaction tx = session.beginTransaction();
+    session.save(empl);
+    tx.commit();
+  }
+
+  private static boolean deleteEmployee(long emplId) {
+    Session session = HibernateUtil.getCurrentSession();
+    Transaction tx = session.beginTransaction();
+
+    // variant 2:
+    Query delQry = session.createQuery("delete from Employee e where e.id = :id");
+    delQry.setLong("id", emplId);
+    boolean deleted = delQry.executeUpdate() > 0;
+
+    tx.commit();
+
+    return deleted;
+  }
+
+  private static boolean updateEmployee(long emplId, String firstName, String lastName, Date dob) {
+    Session session = HibernateUtil.getCurrentSession();
+    Transaction tx = session.beginTransaction();
+
+    Employee empl = (Employee) session.get(Employee.class, emplId);
+    if (empl != null) {
+      empl.setFirstName(firstName);
+      empl.setLastName(lastName);
+      empl.setDateOfBirth(dob);
+    }
+
+    tx.commit();
+
+    return empl != null;
+  }
+
+  private static Employee loadEmployee(long emplId) {
+    Session session = HibernateUtil.getCurrentSession();
+    Transaction tx = session.beginTransaction();
+
+    Employee empl = (Employee) session.get(Employee.class, emplId);
+
+    tx.commit();
+    return empl;
+  }
+
+  @SuppressWarnings("unchecked")
+  private static Collection<Employee> findByLastName(String lastName) {
+    Session session = HibernateUtil.getCurrentSession();
+    Transaction tx = session.beginTransaction();
+
+    // return session.createQuery(
+    // "select e from Employee e where lastName like :lastName '%" + lastName +
+    // "%'").list();
+
+    Query qry = session.createQuery("select e from Employee e where lastName like :lastName");
+    qry.setString("lastName", '%' + lastName + '%');
+    Collection<Employee> empls = qry.list();
+
+    tx.commit();
+    return empls;
+  }
+
+  @SuppressWarnings("unchecked")
+  private static Collection<Employee> listEmployees() {
+    Session session = HibernateUtil.getCurrentSession();
+    Transaction tx = session.beginTransaction();
+
+    Collection<Employee> empls = session.createQuery("select e from Employee e").list();
+    // return Collection<Employee> empls =
+    // session.createQuery("select e from Employee e order by lastName").list();
+
+    tx.commit();
+    return empls;
+  }
+
+  public static void main(String[] args) {
+    DateFormat dfmt = new SimpleDateFormat("dd.MM.yyyy");
+    BufferedReader in = new BufferedReader(new InputStreamReader(System.in));
+    String availCmds = "commands: quit, list, insert, findById, " + "findByLastName, update, delete";
+
+    System.out.println("Hibernate Employee Admin");
+    System.out.println(availCmds);
+    String userCmd = promptFor(in, "");
+
+    while (!userCmd.equals("quit")) {
+
+      try {
+        switch (userCmd) {
+        case "list":
+          for (Employee empl : listEmployees()) {
+            System.out.println(empl);
+          }
+          break;
+
+        case "findById":
+          System.out.println(loadEmployee(Long.parseLong(promptFor(in, "id"))));
+          break;
+
+        case "findByLastName":
+          for (Employee empl : findByLastName(promptFor(in, "lastName"))) {
+            System.out.println(empl);
+          }
+          break;
+
+        case "insert":
+          try {
+            saveEmployee(new Employee(promptFor(in, "firstName"), promptFor(in, "lastName"), dfmt.parse(promptFor(in, "dob (dd.mm.yyyy)"))));
+          } catch (ParseException e) {
+            System.err.println("Invalid date format.");
+          }
+
+          break;
+
+        case "update":
+          try {
+            boolean success = updateEmployee(Long.parseLong(promptFor(in, "id")), promptFor(in, "firstName"), promptFor(in, "lastName"),
+                dfmt.parse(promptFor(in, "dob (dd.mm.yyyy)")));
+            System.out.println(success ? "employee updated" : "employee not found");
+          } catch (ParseException e) {
+            System.err.println("Invalid date format.");
+          }
+          break;
+
+        case "delete":
+          boolean success = deleteEmployee(Long.parseLong(promptFor(in, "id")));
+          System.out.println(success ? "employee deleted" : "employee not found");
+          break;
+
+        default:
+          System.out.println("ERROR: invalid command");
+          break;
+        } // switch
+      } // try
+      catch (Exception ex) {
+        ex.printStackTrace();
+      } // catch
+
+      System.out.println(availCmds);
+      userCmd = promptFor(in, "");
+    } // while
+
+    HibernateUtil.closeSessionFactory();
+  }
+}

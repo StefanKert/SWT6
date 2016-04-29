@@ -1,0 +1,19 @@
+package swt6.orm.data;
+
+import java.sql.Date;
+
+import org.junit.Assert;
+import org.junit.Test;
+
+import swt6.orm.domain.HibernateWorkLogManager;
+import swt6.orm.domain.WorkLogManager;
+import swt6.orm.domain.models.Employee;
+
+public class EmployeeIntegrationTests {
+	@Test
+	public void testEmployeeCreate(){
+		WorkLogManager workLogManager = new HibernateWorkLogManager();
+		Long id = workLogManager.createEmployee(new Employee("Stefan",  "Kert", new Date(2015, 12,1)));
+		Assert.assertNotSame(id, 0);
+	}
+}

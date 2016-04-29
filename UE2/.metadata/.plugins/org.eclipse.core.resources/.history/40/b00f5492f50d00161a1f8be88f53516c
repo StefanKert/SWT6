@@ -1,0 +1,112 @@
+package swt6.orm.domain;
+
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
+
+import swt6.orm.data.IDataProvider;
+import swt6.orm.data.hibernate.HibernateDataProvider;
+import swt6.orm.data.hibernate.HibernateUtil;
+import swt6.orm.domain.models.Employee;
+import swt6.orm.domain.models.LogbookEntry;
+import swt6.orm.domain.models.Phase;
+import swt6.orm.domain.models.Project;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+/***
+ * Hibernate WorkLogManager implementation
+ */
+public class HibernateWorkLogManager  {
+	private IDataProvider<Employee> _employeeProvider = new HibernateDataProvider<Employee>();
+	private IDataProvider<Phase> _phaseProvider = new HibernateDataProvider<Phase>();
+	private IDataProvider<Project> _projectProvider = new HibernateDataProvider<Project>();
+	private IDataProvider<LogbookEntry> _logBookEntryProvider = new HibernateDataProvider<LogbookEntry>();
+		
+    public Long createEmployee(Employee employee) {
+    	return _employeeProvider.create(employee);
+    }
+    
+    public Employee updateEmployee(Employee employee) {
+    	return _employeeProvider.update(employee);
+    }
+
+    public Employee getEmployeeById(long employeeId) {
+    	return _employeeProvider.get(Employee.class, employeeId);
+
+    }
+
+    public List<Employee> getAllEmployees() {
+    	return _employeeProvider.getAll(Employee.class);
+    }
+    
+    public LogbookEntry getLogbookEntryById(long id) {
+		return _logBookEntryProvider.get(LogbookEntry.class, id);
+	}
+
+    public List<Project> getLeadingProjectsForEmployee(long employeeId) {
+    	HibernateDataProvider<Project> dataProvider = new HibernateDataProvider<Project>();
+    	return dataProvider.getAllByRestriction(Project.class, Restrictions.eq("project.leader.id", employeeId));
+    }
+
+    public List<LogbookEntry> getLogbookEntriesForEmployee(long employeeId) {
+    	HibernateDataProvider<LogbookEntry> dataProvider = new HibernateDataProvider<LogbookEntry>();
+    	return dataProvider.getAllByRestriction(LogbookEntry.class, Restrictions.eq("employee.id", employeeId));
+    }
+
+    public Employee addLogbookEntry(Employee employee, LogbookEntry... entries) {
+        for (LogbookEntry entry : entries) {
+        	employee.addLogbookEntry(entry);
+        }
+        
+        return _employeeProvider.update(employee);  
+    }
+
+    public Project createProject(String name, Employee leader, List<Employee> members, List<Module> modules) {
+        Session session = HibernateUtil.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+
+        Project project = new Project(name,leader);
+        session.saveOrUpdate(project);
+        if(members != null) {
+            members.stream().forEach(x -> project.addMember(x));
+        }
+        if(modules != null) {
+            modules.stream().forEach(x -> project.addModule(x));
+        }
+        tx.commit();
+        return project;
+
+    }
+
+    public Employee assignProjectsToEmployee(Employee employee, Project... projects) {
+        for (Project project : projects) {
+        	employee.addProject(project);
+        }
+        
+        return _employeeProvider.update(employee);    
+    }
+
+    public Phase createPhase(String name) {
+    	Phase phase = new Phase(name);
+    	_phaseProvider.create(phase);
+    	return phase;
+    }
+
+    public List<LogbookEntry> getLogbookEntriesForPhase(String phase) {
+        Session session = HibernateUtil.getCurrentSession();
+        Transaction tx = session.beginTransaction();
+        Query query = session.createQuery("select le from LogbookEntry le where le.phase.name = :phase");
+        query.setString("phase", phase);
+        List<LogbookEntry> entries = query.list();
+        tx.commit();
+        return entries;
+    }
+
+    public Project getProjectById(long id) {
+        return _projectProvider.get(Project.class, id);
+    }
+}

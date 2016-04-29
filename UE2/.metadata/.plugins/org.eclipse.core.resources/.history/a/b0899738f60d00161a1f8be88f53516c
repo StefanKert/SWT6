@@ -1,0 +1,41 @@
+package swt6.orm.domain;
+
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.criterion.Restrictions;
+
+import swt6.orm.data.IDataProvider;
+import swt6.orm.data.hibernate.HibernateDataProvider;
+import swt6.orm.data.hibernate.HibernateUtil;
+import swt6.orm.domain.models.Employee;
+import swt6.orm.domain.models.IEntity;
+import swt6.orm.domain.models.LogbookEntry;
+import swt6.orm.domain.models.Phase;
+import swt6.orm.domain.models.Project;
+
+import java.util.List;
+import java.util.stream.Collectors;
+
+public class HibernateWorkLogManager extends WorkLogManager  {
+	protected <T extends IEntity> IDataProvider<T> getDataProviderForType(){
+		return new HibernateDataProvider<T>();
+	}
+   
+
+    public List<Project> getLeadingProjectsForEmployee(long employeeId) {
+    	HibernateDataProvider<Project> dataProvider = getDataProviderForType<Project>();
+    	return dataProvider.getAllByRestriction(Project.class, Restrictions.eq("project.leader.id", employeeId));
+    }
+
+    public List<LogbookEntry> getLogbookEntriesForEmployee(long employeeId) {
+    	HibernateDataProvider<LogbookEntry> dataProvider = new HibernateDataProvider<LogbookEntry>();
+    	return dataProvider.getAllByRestriction(LogbookEntry.class, Restrictions.eq("employee.id", employeeId));
+    }
+
+    public List<LogbookEntry> getLogbookEntriesForPhase(String phase) {
+    	HibernateDataProvider<LogbookEntry> dataProvider = new HibernateDataProvider<LogbookEntry>();
+    	return dataProvider.getAllByRestriction(LogbookEntry.class, Restrictions.eq("logbookEntry.phase.name", phase));
+    }
+}

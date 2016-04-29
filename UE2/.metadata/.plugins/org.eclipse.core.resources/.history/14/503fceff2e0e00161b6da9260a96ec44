@@ -1,0 +1,30 @@
+<persistence xmlns="http://xmlns.jcp.org/xml/ns/persistence"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/persistence
+                                 http://xmlns.jcp.org/xml/ns/persistence/persistence_2_1.xsd"
+	version="2.1">
+
+	<persistence-unit name="WorklogPU">
+		<provider>org.hibernate.ejb.HibernatePersistence</provider>
+
+		<class>swt6.orm.domain.models.Employee</class>
+		<class>swt6.orm.domain.models.TemporaryEmployee</class>
+		<class>swt6.orm.domain.models.PermanentEmployee</class>
+		<class>swt6.orm.domain.models.Project</class>
+		<class>swt6.orm.domain.models.Module</class>
+		<class>swt6.orm.domain.models.Phase</class>
+		<class>swt6.orm.domain.models.LogbookEntry</class>
+
+
+		<properties>
+			<property name="hibernate.archive.autodetection" value="class" />
+			<property name="javax.persistence.jdbc.driver" value="org.h2.Driver" />
+			<property name="javax.persistence.jdbc.url"	value="jdbc:h2:mem:test;DB_CLOSE_DELAY=-1;" />
+			<property name="hibernate.connection.username" value="sa"></property>
+			<property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+			<property name="hibernate.show_sql" value="true" />
+			<property name="hibernate.format_sql" value="false" />
+			<property name="hibernate.hbm2ddl.auto" value="create" />
+		</properties>
+	</persistence-unit>
+</persistence>

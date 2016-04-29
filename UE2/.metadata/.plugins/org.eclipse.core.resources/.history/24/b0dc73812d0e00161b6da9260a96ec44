@@ -1,0 +1,132 @@
+package swt6.orm.data;
+
+import java.util.List;
+
+import org.junit.Assert;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import swt6.orm.data.hibernate.HibernateDataProvider;
+import swt6.orm.domain.WorkLogManager;
+import swt6.orm.domain.models.Address;
+import swt6.orm.domain.models.Employee;
+import swt6.orm.domain.models.LogbookEntry;
+import swt6.orm.domain.models.Module;
+import swt6.orm.domain.models.PermanentEmployee;
+import swt6.orm.domain.models.Phase;
+import swt6.orm.domain.models.Project;
+import swt6.orm.domain.models.TemporaryEmployee;
+import swt6.util.DateUtil;
+
+public abstract class WorkLogManagerTest {
+	@BeforeClass
+	public static void setUpClass() throws Exception {
+		generateData(10);
+	}
+	
+	protected abstract WorkLogManager getWorkLogManager();
+	protected static void generateData(int amount) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+
+	@Test
+	public void testCreate_Employee() {
+		WorkLogManager workLogManager = getWorkLogManager();
+		Employee employee = new Employee("TestName", "Testnameweiter", DateUtil.getDate(2015, 12, 2));
+		Long id = workLogManager.createEmployee(employee);
+		Employee employeeInDb = workLogManager.getEmployeeById(id);
+		Assert.assertEquals(employee.getFirstName(), employeeInDb.getFirstName());
+		Assert.assertEquals(employee.getLastName(), employeeInDb.getLastName());
+		Assert.assertEquals(employee.getDateOfBirth(), employeeInDb.getDateOfBirth());
+		workLogManager.deleteEmployee(employeeInDb);
+	}
+	
+	@Test
+	public void testUpdate_Employee() {
+		WorkLogManager workLogManager = getWorkLogManager();
+		Employee employee = new Employee("TestName", "Testnameweiter", DateUtil.getDate(2015, 12, 2));
+		Long id = workLogManager.createEmployee(employee);
+		Employee employeeInDb = workLogManager.getEmployeeById(id);
+		employeeInDb.setFirstName("Neuer Name");
+		workLogManager.updateEmployee(employeeInDb);
+		Employee updatedEmployeeInDb = workLogManager.getEmployeeById(id);
+		Assert.assertEquals("Neuer Name", updatedEmployeeInDb.getFirstName());
+		Assert.assertEquals(employee.getLastName(), updatedEmployeeInDb.getLastName());
+		Assert.assertEquals(employee.getDateOfBirth(), updatedEmployeeInDb.getDateOfBirth());
+		workLogManager.deleteEmployee(updatedEmployeeInDb);
+	}
+	
+	@Test
+	public void testDeletingEmployee_ShouldCascadeDeletingAddress() {
+		WorkLogManager workLogManager = getWorkLogManager();
+		Employee employee = new Employee("TestName", "Testnameweiter", DateUtil.getDate(2015, 12, 2));
+		Long id = workLogManager.createEmployee(employee);
+		Employee employeeInDb = workLogManager.getEmployeeById(id);
+		Address address = new Address("TestZip", "TestCity", "TestStreet");
+		employeeInDb.setAddress(address);
+		workLogManager.updateEmployee(employeeInDb);
+		Employee updatedEmployeeInDb = workLogManager.getEmployeeById(id);
+		Assert.assertEquals(address.getCity(), updatedEmployeeInDb.getAddress().getCity());
+		Assert.assertEquals(address.getStreet(), updatedEmployeeInDb.getAddress().getStreet());
+		Assert.assertEquals(address.getZipCode(), updatedEmployeeInDb.getAddress().getZipCode());
+
+		workLogManager.deleteEmployee(updatedEmployeeInDb);
+		
+		Assert.assertNull(workLogManager.getAddressById(updatedEmployeeInDb.getAddress().getId()));
+	}
+	
+	@Test
+	public void testDelete_Employee() {
+		WorkLogManager workLogManager = getWorkLogManager();
+		Employee employee = new Employee("TestName", "Testnameweiter", DateUtil.getDate(2015, 12, 2));
+		Long id = workLogManager.createEmployee(employee);
+		Employee employeeInDb = workLogManager.getEmployeeById(id);
+		workLogManager.deleteEmployee(employeeInDb);
+		Employee probablyDeletedEmployee = workLogManager.getEmployeeById(id);
+		Assert.assertNull(probablyDeletedEmployee);
+	}
+
+	@Test
+	public void testGetAll_Employees_ShouldReturn_10() {
+		WorkLogManager workLogManager = getWorkLogManager();
+		List<Employee> entries = workLogManager.getAllEmployees();
+		Assert.assertSame(entries.size(), 10);
+	}
+
+	@Test
+	public void testGetAll_LogbookEntry_ShouldReturn_50() {
+		WorkLogManager workLogManager = getWorkLogManager();
+		List<LogbookEntry> entries = workLogManager.getAllLogbookEntries();
+		Assert.assertSame(entries.size(), 50);
+	}
+
+	@Test
+	public void testGetAll_Phases_ShouldReturn_50() {
+		WorkLogManager workLogManager = getWorkLogManager();
+		List<Phase> entries = workLogManager.getAllPhases();
+		Assert.assertSame(entries.size(), 50);
+	}
+
+	@Test
+	public void testGetAll_Projects_ShouldReturn_50() {
+		WorkLogManager workLogManager = getWorkLogManager();
+		List<Project> entries = workLogManager.getAllProjects();
+		Assert.assertSame(entries.size(), 50);
+	}
+
+	@Test
+	public void testGetAll_Modules_ShouldReturn_50() {
+		WorkLogManager workLogManager = getWorkLogManager();
+		List<Module> entries = workLogManager.getAllModules();
+		Assert.assertSame(entries.size(), 50);
+	}
+
+	@Test
+	public void testGetAll_Addresses_ShouldReturn_10() {
+		WorkLogManager workLogManager = getWorkLogManager();
+		List<Address> entries = workLogManager.getAllAddresses();
+		Assert.assertSame(entries.size(), 10);
+	}
+}

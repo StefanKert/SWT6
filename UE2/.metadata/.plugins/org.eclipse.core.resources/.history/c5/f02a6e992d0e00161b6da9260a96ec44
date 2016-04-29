@@ -1,0 +1,18 @@
+package swt6.orm.data;
+
+import org.junit.BeforeClass;
+
+import swt6.orm.domain.JPAWorkLogManager;
+import swt6.orm.domain.WorkLogManager;
+
+public class JPAWorkLogManagerTest extends WorkLogManagerTest {
+	@BeforeClass
+	public static void setUpClass() throws Exception {
+		generateData(10);
+	}
+	
+	@Override
+	protected WorkLogManager getWorkLogManager(){
+		return new JPAWorkLogManager();
+	}
+}

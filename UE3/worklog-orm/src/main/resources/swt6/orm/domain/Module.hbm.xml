@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="swt6.orm.domain.hibernate">
+	<class name="HibernateModule">
+		<id name="id" type="long">
+			<column name="id" />
+			<generator class="native" />
+		</id>
+		<property name="name" />
+
+		<set name="logbookEntries" inverse="true">
+			<key>
+				<column name="module_id"></column>
+			</key>
+			<one-to-many class="HibernateLogbookEntry" />
+		</set>
+
+		<many-to-one name="project" class="HibernateProject" column="project_id" lazy="false"
+			cascade="save-update,merge" fetch="join" not-null="false" />
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,10 @@
+package swt6.orm.data;
+
+import swt6.orm.domain.HibernateWorkLogManager;
+import swt6.orm.domain.WorkLogManager;
+
+public class HibernateWorkLogManagerTest extends WorkLogManagerTest {
+	protected WorkLogManager getWorkLogManager(){
+		return new HibernateWorkLogManager();
+	}
+}

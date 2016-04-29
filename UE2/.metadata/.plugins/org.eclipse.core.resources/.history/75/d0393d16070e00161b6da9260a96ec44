@@ -1,0 +1,13 @@
+package swt6.orm.data.test;
+
+import org.junit.Test;
+
+import swt6.orm.domain.HibernateWorkLogManager;
+import swt6.orm.domain.WorkLogManager;
+
+public class EmployeeIntegrationTests {
+	@Test
+	public void testEmployeeCreate(){
+		WorkLogManager workManager = new HibernateWorkLogManager();
+	}
+}

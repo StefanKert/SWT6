@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="swt6.orm.domain.IEntity"/>
+<fullyQualifiedTypeName name="java.util.function.Consumer"/>
+<fullyQualifiedTypeName name="java.util.concurrent.Callable"/>
+<fullyQualifiedTypeName name="java.util.function.Function"/>
+<fullyQualifiedTypeName name="org.apache.derby.vti.Restriction"/>
+<fullyQualifiedTypeName name="org.hibernate.criterion.Restrictions"/>
+<fullyQualifiedTypeName name="org.hibernate.criterion.Criterion"/>
+<fullyQualifiedTypeName name="javax.persistence.Query"/>
+<fullyQualifiedTypeName name="javax.persistence.criteria.CriteriaQuery"/>
+<fullyQualifiedTypeName name="java.io.InputStream"/>
+<fullyQualifiedTypeName name="org.junit.Test"/>
+<fullyQualifiedTypeName name="swt6.orm.domain.WorkLogManager"/>
+<fullyQualifiedTypeName name="java.sql.Date"/>
+<fullyQualifiedTypeName name="junit.framework.Assert"/>
+<fullyQualifiedTypeName name="org.junit.Assert"/>
+<fullyQualifiedTypeName name="org.junit.BeforeClass"/>
+<fullyQualifiedTypeName name="swt6.orm.data.hibernate.HibernateDataProvider"/>
+<fullyQualifiedTypeName name="swt6.orm.domain.HibernateWorkLogManager"/>
+<fullyQualifiedTypeName name="swt6.orm.data.JPAWorkLogManagerTest"/>
+<fullyQualifiedTypeName name="swt6.orm.domain.JPAWorkLogManager"/>
+<fullyQualifiedTypeName name="swt6.orm.data.jpa.JPADataProvider"/>
+<fullyQualifiedTypeName name="org.junit.AfterClass"/>
+<fullyQualifiedTypeName name="swt6.orm.data.jpa.JPAUtil"/>
+<fullyQualifiedTypeName name="swt6.orm.data.IDataProvider"/>
+<fullyQualifiedTypeName name="swt6.orm.domain.models.IEntity"/>
+<fullyQualifiedTypeName name="swt6.orm.domain.models.Address"/>
+<fullyQualifiedTypeName name="swt6.orm.domain.models.Module"/>
+<fullyQualifiedTypeName name="swt6.orm.domain.models.Phase"/>
+<fullyQualifiedTypeName name="swt6.orm.domain.models.LogbookEntry"/>
+<fullyQualifiedTypeName name="swt6.util.DateUtil"/>
+<fullyQualifiedTypeName name="swt6.orm.domain.models.PermanentEmployee"/>
+<fullyQualifiedTypeName name="swt6.orm.domain.models.TemporaryEmployee"/>
+<fullyQualifiedTypeName name="swt6.orm.domain.models.Project"/>
+<fullyQualifiedTypeName name="swt6.orm.data.hibernate.HibernateUtil"/>
+<fullyQualifiedTypeName name="swt6.orm.domain.models.Employee"/>
+</qualifiedTypeNameHistroy>

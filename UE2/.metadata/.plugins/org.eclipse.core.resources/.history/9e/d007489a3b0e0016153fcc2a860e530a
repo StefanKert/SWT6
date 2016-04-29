@@ -1,0 +1,5 @@
+package swt6.orm.hibernate;
+
+public class HibernateWorkManager {
+
+}
