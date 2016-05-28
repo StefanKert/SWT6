@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head">
+<title>App Title</title>
+</head>
+
+<body role="document">
+	<div th:replace="layout :: navBar">Navigation Bar</div>
+
+	<div class="container">
+
+		<div class="page-title">
+			<h2>Set Bet</h2>
+		</div>
+
+		<form th:object="${bet}" method="post" class="form-horizontal">
+			<input type="hidden" th:field="*{id}" />
+
+			<div class="form-group">
+				<label for="user" class="col-sm-2 control-label">User:</label> <select th:field="*{user}"
+					class="form-control col-sm-10" id="user">
+					<option th:each="user : ${users}" th:value="${user.id}"
+						th:text="${user.name}">User</option>
+				</select>
+			</div>
+
+			<div class="form-group">
+				<div class="col-sm-12">
+
+					<div class="form-group">
+						<label for="exampleInputName2" th:text="${bet.game.teamA.name}">Name</label>
+						<input type="text" th:field="*{game.goalsA}" class="form-control"
+							id="exampleInputName2" placeholder="Jane Doe" />
+					</div>
+				</div>
+			</div>
+
+			<div class="row">
+				<div class="col-sm-12">
+					<div class="form-group col-sm-11">
+						<label for="teamB">Team B:</label> <input id="teamB" type="text"
+							th:field="*{game.teamB.name}" class="form-control"
+							readonly="readonly" />
+					</div>
+					<div class="form-group col-sm-1">
+						<label class="control-label" for="teamBGoals">Goals:</label> <input
+							id="teamBGoals" type="text" th:field="*{game.goalsB}"
+							class="form-control" />
+					</div>
+				</div>
+			</div>
+			<input type="submit" th:value="${bet.id == null ? 'Add' : 'Update'}"
+				class="btn btn-success" />
+
+		</form>
+	</div>
+	<div th:replace="layout :: scripts"></div>
+
+</body>
+</html>

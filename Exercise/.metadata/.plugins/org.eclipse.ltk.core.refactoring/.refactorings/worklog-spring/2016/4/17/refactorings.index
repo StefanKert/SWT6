@@ -1,0 +1,8 @@
+1461997225428	Rename type 'GreeetingService'
+1461997244423	Extract interface 'GreetingInterface'
+1461997907851	Rename type 'GreetingInterface'
+1461998655294	Extract interface 'Logger'
+1461999358031	Delete element
+1461999690701	Rename resource 'tests'
+1461999802917	Delete element
+1462003095151	Copy compilation unit

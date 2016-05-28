@@ -1,0 +1,5 @@
+package spring.worklog.web;
+
+public class EmployeeController {
+
+}

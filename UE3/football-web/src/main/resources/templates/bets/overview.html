@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head">
+<title>App Title</title>
+</head>
+
+<body role="document">
+	<div th:replace="layout :: navBar">Navigation Bar</div>
+
+	<div class="container">
+
+		<div class="page-title">
+			<h2>Bet List</h2>
+		</div>
+
+		<table class="table table-striped table-condensed">
+			<thead>
+				<tr>
+					<th>User</th>
+					<th>Team A</th>
+					<th>Team B</th>
+					<th>Date</th>
+					<th>Goals - Team A</th>
+					<th>Tipped Goals - Team A</th>
+					<th>Goals - Team B</th>
+					<th>Tipped Goals - Team A</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="bet : ${bets}" th:class="${bet.isCorrect} ? success : danger">
+					<td th:text="${bet.user.name}">User</td>
+					<td th:text="${bet.game.teamA.name}">Team A</td>
+					<td th:text="${bet.game.teamB.name}">Team B</td>
+					<td th:text="${bet.game.date}">01-01-01</td>
+					<td th:text="${bet.game.goalsA}">0</td>
+					<td th:text="${bet.tippedGoalsA}">0</td>
+					<td th:text="${bet.game.goalsB}">0</td>
+					<td th:text="${bet.tippedGoalsB}">0</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

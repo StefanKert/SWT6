@@ -1,0 +1,5 @@
+package swt6.spring.basics.ioc.logic;
+
+public class WorkLogAnnotationBased {
+
+}

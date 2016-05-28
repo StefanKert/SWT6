@@ -1,0 +1,9 @@
+package swt6.spring.basics.ioc.util;
+
+public class ConsoleLogger {
+	private String prefix = "Log";
+	
+	public void log(String message){
+		System.out.println(message);
+	}
+}

@@ -1,0 +1,43 @@
+package swt6.spring.basics.ioc.logic;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
+import swt6.spring.basics.ioc.domain.Employee;
+import swt6.spring.basics.ioc.util.ConsoleLogger;
+//import swt6.spring.basics.ioc.util.LoggerFactory;
+
+public class WorkLogImplFactoryBased {
+
+	private ConsoleLogger logger = new ConsoleLogger();
+
+	private Map<Long, Employee> employees = new HashMap<Long, Employee>();
+
+	private void initLogger() {
+		// TODO 
+		//logger = LoggerFactory.getLogger("swt6/spring/basics/logic/worklog.properties");
+	}
+
+	private void initDB() {
+		employees.put(1L, new Employee(1L, "Bill", "Gates"));
+		employees.put(2L, new Employee(2L, "James", "Goslin"));
+		employees.put(3L, new Employee(3L, "Bjarne", "Stroustrup"));
+	}
+
+	public WorkLogImplFactoryBased() {
+		initLogger();
+		initDB();
+	}
+
+	public Employee findEmployeeById(Long id) {
+		logger.log("findEmployeeById(" + id + ")");
+		return employees.get(id);
+	}
+
+	public List<Employee> findAllEmployees() {
+		logger.log("findAllEmployees()");
+		return new ArrayList<Employee>(employees.values());
+	}
+}

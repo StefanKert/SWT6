@@ -1,0 +1,10 @@
+package swt6.spring.worklog.config;
+
+import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.ImportResource;
+
+@Configuration
+@ImportResource({"/applicationContext-jpa.xml"})
+public class AppConfig {
+
+}

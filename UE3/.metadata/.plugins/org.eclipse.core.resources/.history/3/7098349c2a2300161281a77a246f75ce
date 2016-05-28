@@ -1,0 +1,50 @@
+package swt6.soccer.domain;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.*;
+import javax.validation.constraints.NotNull;
+import java.time.LocalDate;
+
+/**
+ * Game entity
+ */
+@Entity
+public class Game {
+    @Id
+    @GeneratedValue
+    private Long id;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "TEAM_A_ID")
+    private Team teamA;
+
+    @NotNull
+    @ManyToOne
+    @JoinColumn(name = "TEAM_B_ID")
+    private Team teamB;
+
+    private int goalsA;
+    private int goalsB;
+
+    @NotNull
+    @DateTimeFormat(pattern = "MM/dd/yyyy")
+    private LocalDate date;
+
+	public int getGoalsA() {
+		return goalsA;
+	}
+
+	public void setGoalsA(int goalsA) {
+		this.goalsA = goalsA;
+	}
+
+	public int getGoalsB() {
+		return goalsB;
+	}
+
+	public void setGoalsB(int goalsB) {
+		this.goalsB = goalsB;
+	}
+}

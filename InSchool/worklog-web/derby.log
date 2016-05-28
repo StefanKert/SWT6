@@ -1,0 +1,26 @@
+----------------------------------------------------------------
+Fri May 13 18:40:50 CEST 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance a816c00e-0154-aafd-f390-00000e682198 
+on database directory memory:C:\Users\Stefan\Documents\GitHub\SWT6\InSchool\worklog-web\testdb with class loader sun.misc.Launcher$AppClassLoader@764c12b6 
+Loaded from file:/C:/Users/Stefan/.m2/repository/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_77-b03
+user.dir=C:\Users\Stefan\Documents\GitHub\SWT6\InSchool\worklog-web
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''
+----------------------------------------------------------------
+Fri May 13 18:59:38 CEST 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.12.1.1 - (1704137): instance 01b7c0e6-0154-aafd-f390-00000e682198 
+on database directory memory:C:\Users\Stefan\Documents\GitHub\SWT6\InSchool\worklog-web\WorkLogDb with class loader sun.misc.Launcher$AppClassLoader@764c12b6 
+Loaded from file:/C:/Users/Stefan/.m2/repository/org/apache/derby/derby/10.12.1.1/derby-10.12.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_77-b03
+user.dir=C:\Users\Stefan\Documents\GitHub\SWT6\InSchool\worklog-web
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=null
+Database Class Loader started - derby.database.classpath=''

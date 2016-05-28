@@ -1,0 +1,10 @@
+package swt6.spring.worklog;
+
+public class SpringBootMain {
+
+	public static void main(String[] args) {
+		// TODO Auto-generated method stub
+
+	}
+
+}

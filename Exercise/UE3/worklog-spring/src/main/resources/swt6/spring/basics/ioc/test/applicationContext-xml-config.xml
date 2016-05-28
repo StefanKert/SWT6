@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
+                        http://www.springframework.org/schema/beans/spring-beans.xsd
+                        http://www.springframework.org/schema/context
+                        http://www.springframework.org/schema/context/spring-context.xsd">
+
+
+	<bean id="consoleLogger" class="swt6.spring.basics.ioc.util.ConsoleLogger" />
+
+	<bean id="fileLogger" class="swt6.spring.basics.ioc.util.FileLogger" destroy-method="close">
+		<constructor-arg value="log.txt" />
+	</bean>
+
+	<bean id="errorLogger" class="swt6.spring.basics.ioc.util.ConsoleLogger">
+		<property name="prefix" value="ErrorLog" />
+	</bean>
+
+	
+	<!-- setter injection TODO -->
+	<bean id="workLog-setter-injected" class="swt6.spring.basics.ioc.logic.WorkLogImplXmlConfigBased">
+		<!-- Version 1 -->
+<!-- 	<property name="logger" ref="consoleLogger" />	 -->
+		
+		<!-- Version 2 -->
+		<property name="logger">
+			<bean class="swt6.spring.basics.ioc.util.ConsoleLogger" />
+		</property>
+	</bean>
+
+	<!-- constructor injection  TODO -->
+	<bean id="workLog-constructor-injected" class="swt6.spring.basics.ioc.logic.WorkLogImplXmlConfigBased" >
+		<constructor-arg ref="consoleLogger" />
+	</bean>
+
+
+</beans>

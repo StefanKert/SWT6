@@ -1,0 +1,39 @@
+package swt6.soccer.logic;
+
+import swt6.soccer.domain.Bet;
+import swt6.soccer.domain.Game;
+import swt6.soccer.domain.Team;
+import swt6.soccer.domain.User;
+
+import java.util.List;
+
+public interface SoccerService {
+
+	User syncUser(User user);
+    
+    User findUser(Long id);
+ 
+    List<User> getAllUsers();
+
+    Bet saveBetWithGame(Bet bet, long gameId);
+    
+	Bet findBet(Long id);
+    
+    List<Bet> getAllBets();
+
+    
+    Team syncTeam(Team team);
+
+    Team findTeam(Long id);
+
+    List<Team> getAllTeams();
+    
+
+    Game syncGame(Game game);
+    
+    Game findGame(Long id);
+    
+    List<Game> getAllGamesSortedByDate();
+
+
+}

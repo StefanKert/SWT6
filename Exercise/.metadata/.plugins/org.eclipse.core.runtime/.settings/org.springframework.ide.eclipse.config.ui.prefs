@@ -1,0 +1,6 @@
+//com.springsource.config.ui.prefs.activePageIndex\:/worklog-spring/src/main/resources/swt6/spring/basics/aop/test/applicationContext-annotation-based-aop.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
+//com.springsource.config.ui.prefs.activePageIndex\:/worklog-spring/src/main/resources/swt6/spring/basics/aop/test/applicationContext-config-based-aop.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
+//com.springsource.config.ui.prefs.activePageIndex\:/worklog-spring/src/main/resources/swt6/spring/basics/hello/greetingService.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
+//com.springsource.config.ui.prefs.activePageIndex\:/worklog-spring/src/main/resources/swt6/spring/basics/ioc/test/applicationContext-annotation-config.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
+//com.springsource.config.ui.prefs.activePageIndex\:/worklog-spring/src/main/resources/swt6/spring/basics/ioc/test/applicationContext-xml-config.xml=<?xml version\="1.0" encoding\="UTF-8"?>\r\n<activePage index\="0"/>
+eclipse.preferences.version=1

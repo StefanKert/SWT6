@@ -1,0 +1,21 @@
+#additional properties required for Java based config (version 2)
+spring.datasource.driver-class-name=org.apache.derby.jdbc.EmbeddedDriver
+spring.datasource.url=jdbc:derby:memory:SoccerBetSystemDb;create=true
+spring.datasource.username=jpa
+spring.datasource.password=pojo
+spring.jpa.show-sql=false
+spring.jpa.ddl-auto=create-drop
+spring.jpa.dialect=org.hibernate.dialect.DerbyTenSevenDialect
+
+
+# Thymeleaf configuration
+# Allow Thymeleaf templates to be reloaded at dev time
+spring.thymeleaf.cache=false
+server.tomcat.access-log-enabled=true
+server.tomcat.basedir=target/tomcat
+
+#messages
+spring.messages.basename=locale/messages
+
+spring.profiles.active=dev
+

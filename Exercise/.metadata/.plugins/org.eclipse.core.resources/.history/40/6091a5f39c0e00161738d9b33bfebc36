@@ -1,0 +1,11 @@
+package swt6.spring.basics.hello;
+
+public class GreetingClient {
+
+	public static void main(String[] args) {
+		try(ClassPathXmlApplicationContext factory = new ClassPathXmlApplicationContext("swt6/spring/bascis/hello/greetingService.xml")){
+			
+		}
+	}
+
+}

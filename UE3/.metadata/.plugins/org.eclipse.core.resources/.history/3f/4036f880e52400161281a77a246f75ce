@@ -1,0 +1,12 @@
+package swt6.soccer.converter;
+
+import java.util.Date;
+
+import org.springframework.stereotype.Component;
+
+@Component
+public class DateToClassConverter {
+	public String calculateClass(Date date) {
+		return date.after(new Date()) ? "warning" : "success";
+	}
+}

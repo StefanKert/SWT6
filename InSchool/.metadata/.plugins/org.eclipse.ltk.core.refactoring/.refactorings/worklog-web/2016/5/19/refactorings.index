@@ -1,0 +1,4 @@
+1463154455135	Rename resource 'applicationContext-jpa2.xml'
+1463155372154	Move 3 resources to 'locale'
+1463155376488	Delete element
+1463156716708	Rename package 'spring.worklog.web'

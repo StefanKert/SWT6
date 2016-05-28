@@ -1,0 +1,87 @@
+package swt6.soccer.web;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.propertyeditors.CustomDateEditor;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
+import org.springframework.web.bind.WebDataBinder;
+import org.springframework.web.bind.annotation.InitBinder;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import swt6.soccer.domain.Game;
+import swt6.soccer.logic.SoccerService;
+
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.List;
+
+import javax.validation.Valid;
+
+@Controller
+public class GameController {
+
+    @Autowired
+    private SoccerService soccerService;
+
+    private final Logger logger = LoggerFactory.getLogger(GameController.class);
+
+    @InitBinder
+	public void initBinder(WebDataBinder binder) {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd/MM/yyyy");
+		dateFormat.setLenient(false);
+		binder.registerCustomEditor(Date.class, new CustomDateEditor(dateFormat, false));
+	}
+    
+    @RequestMapping(value = "/games")
+    public String listGames(Model model) {
+    	List<Game> games = soccerService.getAllGames();
+        logger.info("Goals A after update " + soccerService.findGame((long) 1).getGoalsA());
+		model.addAttribute("games", games);
+		return "games/overview";
+    }
+    
+    @RequestMapping(value = "/games/{gameId}", method = RequestMethod.GET)
+	public String details(@PathVariable("gameId") Long gameId, Model model) {
+		model.addAttribute("teams", soccerService.getAllTeams());
+		model.addAttribute("game", soccerService.findGame(gameId));
+		return "games/details";
+	}
+
+    @RequestMapping(value = "/games/create", method = RequestMethod.GET)
+    public String detailsCreate(Model model){
+        model.addAttribute("teams",soccerService.getAllTeams());
+        model.addAttribute("game", new Game());
+        return "games/details";
+    }
+    
+    @RequestMapping(value = "/games/{gameId}", method = RequestMethod.POST)
+    public String update(@Valid @ModelAttribute("game") Game game, BindingResult result, Model model){
+        if (result.hasErrors()) {
+            model.addAttribute("teams",soccerService.getAllTeams());
+            model.addAttribute("game", game);
+            return "games/details";
+        }
+
+        soccerService.syncGame(game);
+        return "redirect:/games";
+    }
+
+
+    @RequestMapping(value = "/games/create", method = RequestMethod.POST)
+    public String create(@Valid @ModelAttribute("game") Game game, BindingResult result, Model model){
+        if (result.hasErrors()) {
+        	logger.info(result.getAllErrors().get(0).getDefaultMessage());
+            model.addAttribute("teams",soccerService.getAllTeams());
+            model.addAttribute("game", game);
+            return "games/details";
+        }
+
+        soccerService.syncGame(game);
+        return "redirect:/games";
+    }
+}

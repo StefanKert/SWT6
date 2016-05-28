@@ -1,0 +1,19 @@
+package swt6.spring.basics.ioc.util;
+
+public class ConsoleLogger implements Logger {
+	private String prefix = "Log";
+
+	public void setPrefix(String prefix) {
+		this.prefix = prefix;
+	}
+
+	/*
+	 * (non-Javadoc)
+	 * 
+	 * @see swt6.spring.basics.ioc.util.Logger#log(java.lang.String)
+	 */
+	@Override
+	public void log(String message) {
+		System.out.println(prefix + ": " + message);
+	}
+}

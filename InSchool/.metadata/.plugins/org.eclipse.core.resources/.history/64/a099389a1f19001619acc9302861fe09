@@ -1,0 +1,53 @@
+package swt6.spring.worklog.logic;
+
+import java.util.List;
+
+import org.springframework.transaction.annotation.Transactional;
+
+import swt6.spring.worklog.dao.EmployeeDao;
+import swt6.spring.worklog.domain.Employee;
+import swt6.spring.worklog.domain.LogbookEntry;
+
+@Transactional
+public class WorklogImpl1 implements WorkLogFacade {
+
+	private EmployeeDao employeeDao;
+
+	@Override
+	public Employee syncEmployee(Employee employee) {
+		return this.employeeDao.merge(employee);
+	}
+
+	@Override
+	public Employee findEmployeeById(Long id) {
+		return this.employeeDao.findById(id);
+	}
+
+	@Override
+	@Transactional(readOnly=true)
+	public List<Employee> findAllEmployees() {
+		return this.employeeDao.findAll();
+	}
+
+	public void setEmployeeDao(EmployeeDao employeeDao) {
+		this.employeeDao = employeeDao;
+	}
+
+	@Override
+	public LogbookEntry syncLogbookEntry(LogbookEntry entry) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public LogbookEntry findLogbookEntryById(Long id) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deleteLogbookEntryById(Long id) {
+		// TODO Auto-generated method stub
+		
+	}
+}

@@ -1,0 +1,7 @@
+database.driverClassName=org.apache.derby.jdbc.ClientDriver
+database.url=jdbc:derby://localhost/SoccerBetSystemDb;create=true
+
+database.username=sa
+database.password=sa
+
+hibernate.dialect=org.hibernate.dialect.DerbyTenSevenDialect

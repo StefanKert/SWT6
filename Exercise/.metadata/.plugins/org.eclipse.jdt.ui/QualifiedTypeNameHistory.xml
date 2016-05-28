@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="org.springframework.context.support.ClassPathXmlApplicationContext"/>
+<fullyQualifiedTypeName name="org.springframework.context.support.AbstractApplicationContext"/>
+<fullyQualifiedTypeName name="swt6.spring.basics.ioc.util.FileLogger"/>
+<fullyQualifiedTypeName name="swt6.spring.basics.ioc.util.LoggerFactory"/>
+<fullyQualifiedTypeName name="org.springframework.beans.factory.annotation.Autowired"/>
+<fullyQualifiedTypeName name="org.springframework.stereotype.Component"/>
+<fullyQualifiedTypeName name="javax.inject.Named"/>
+<fullyQualifiedTypeName name="javax.inject.Inject"/>
+<fullyQualifiedTypeName name="swt6.spring.basics.ioc.util.LoggerType"/>
+<fullyQualifiedTypeName name="swt6.spring.basics.ioc.util.Log"/>
+<fullyQualifiedTypeName name="org.springframework.context.annotation.ComponentScan"/>
+<fullyQualifiedTypeName name="org.springframework.context.annotation.Configuration"/>
+<fullyQualifiedTypeName name="java.util.logging.Logger"/>
+<fullyQualifiedTypeName name="swt6.spring.basics.ioc.util.Logger"/>
+<fullyQualifiedTypeName name="org.springframework.context.annotation.Bean"/>
+<fullyQualifiedTypeName name="swt6.spring.basics.ioc.util.ConsoleLogger"/>
+<fullyQualifiedTypeName name="swt6.spring.basics.ioc.logic.WorkLogFacade"/>
+<fullyQualifiedTypeName name="swt6.spring.basics.ioc.logic.WorkLogJavaBased"/>
+</qualifiedTypeNameHistroy>

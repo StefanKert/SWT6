@@ -1,0 +1,38 @@
+Sat May 07 08:49:40 CEST 2016 : Apache Derby Network Server 10.11.1.1 - (1616546) wurde gestartet und ist bereit, Verbindungen auf Port 1527 zu akzeptieren.
+----------------------------------------------------------------
+Sat May 07 08:54:15 CEST 2016:
+Booting Derby version The Apache Software Foundation - Apache Derby - 10.11.1.1 - (1616546): instance a816c00e-0154-89fa-8f67-000053069e39 
+on database directory C:\Sources\SWT6\UE3\worklog-spring\data\sample with class loader ClassRealm[plugin>org.jheinzel.maven:derby-maven-plugin:1.0, parent: sun.misc.Launcher$AppClassLoader@5c647e05] 
+Loaded from file:/C:/Users/tschm/.m2/repository/org/apache/derby/derby/10.11.1.1/derby-10.11.1.1.jar
+java.vendor=Oracle Corporation
+java.runtime.version=1.8.0_91-b14
+user.dir=C:\Sources\SWT6\UE3\worklog-spring
+os.name=Windows 10
+os.arch=amd64
+os.version=10.0
+derby.system.home=C:\Sources\SWT6\UE3\worklog-spring\data
+Database Class Loader started - derby.database.classpath=''
+Sat May 07 08:54:17 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 166), (SESSIONID = 0), (DATABASE = sample), (DRDAID = {277}), Committing
+Sat May 07 08:54:17 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 166), (SESSIONID = 0), (DATABASE = sample), (DRDAID = {277}), Rolling back
+Sat May 07 08:54:17 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 167), (SESSIONID = 1), (DATABASE = sample), (DRDAID = {277}), Committing
+Sat May 07 08:54:17 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 167), (SESSIONID = 1), (DATABASE = sample), (DRDAID = {277}), Committing
+Sat May 07 08:54:20 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 168), (SESSIONID = 1), (DATABASE = sample), (DRDAID = ????????.????-593347788302007473{277}), Begin compiling prepared statement: CALL SYSIBM.SQLTABLES('', '', '', '', 'GETCATALOGS=1') :End prepared statement
+Sat May 07 08:54:20 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 168), (SESSIONID = 1), (DATABASE = sample), (DRDAID = ????????.????-593347788302007473{277}), End compiling prepared statement: CALL SYSIBM.SQLTABLES('', '', '', '', 'GETCATALOGS=1') :End prepared statement
+Sat May 07 08:54:20 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 168), (SESSIONID = 1), (DATABASE = sample), (DRDAID = ????????.????-593347788302007473{277}), Executing prepared statement: CALL SYSIBM.SQLTABLES('', '', '', '', 'GETCATALOGS=1') :End prepared statement
+Sat May 07 08:54:20 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 168), (SESSIONID = 1), (DATABASE = sample), (DRDAID = ????????.????-593347788302007473{277}), Begin compiling prepared statement: EXECUTE STATEMENT SYS."getCatalogs" :End prepared statement
+Sat May 07 08:54:20 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 168), (SESSIONID = 1), (DATABASE = sample), (DRDAID = ????????.????-593347788302007473{277}), End compiling prepared statement: EXECUTE STATEMENT SYS."getCatalogs" :End prepared statement
+Sat May 07 08:54:20 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 168), (SESSIONID = 1), (DATABASE = sample), (DRDAID = ????????.????-593347788302007473{277}), Begin compiling prepared statement: SELECT TABLE_CAT FROM ( VALUES ('') ) AS CATALOGS(TABLE_CAT) WHERE (1=0) :End prepared statement
+Sat May 07 08:54:20 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 168), (SESSIONID = 1), (DATABASE = sample), (DRDAID = ????????.????-593347788302007473{277}), End compiling prepared statement: SELECT TABLE_CAT FROM ( VALUES ('') ) AS CATALOGS(TABLE_CAT) WHERE (1=0) :End prepared statement
+Sat May 07 08:54:20 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 168), (SESSIONID = 1), (DATABASE = sample), (DRDAID = ????????.????-593347788302007473{277}), Executing prepared statement: EXECUTE STATEMENT SYS."getCatalogs" :End prepared statement
+Sat May 07 08:54:21 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 168), (SESSIONID = 1), (DATABASE = sample), (DRDAID = ????????.????-593347788302007473{277}), Committing
+Sat May 07 08:54:21 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 168), (SESSIONID = 1), (DATABASE = sample), (DRDAID = ????????.????-593347788302007473{277}), Committing
+Sat May 07 08:54:22 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 168), (SESSIONID = 1), (DATABASE = sample), (DRDAID = ????????.????-593347788302007473{277}), Begin compiling prepared statement: CALL SYSIBM.SQLTABLES('', '', '', '', 'GETSCHEMAS=1') :End prepared statement
+Sat May 07 08:54:22 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 168), (SESSIONID = 1), (DATABASE = sample), (DRDAID = ????????.????-593347788302007473{277}), End compiling prepared statement: CALL SYSIBM.SQLTABLES('', '', '', '', 'GETSCHEMAS=1') :End prepared statement
+Sat May 07 08:54:22 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 168), (SESSIONID = 1), (DATABASE = sample), (DRDAID = ????????.????-593347788302007473{277}), Executing prepared statement: CALL SYSIBM.SQLTABLES('', '', '', '', 'GETSCHEMAS=1') :End prepared statement
+Sat May 07 08:54:22 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 168), (SESSIONID = 1), (DATABASE = sample), (DRDAID = ????????.????-593347788302007473{277}), Begin compiling prepared statement: EXECUTE STATEMENT SYS."getSchemas" :End prepared statement
+Sat May 07 08:54:22 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 168), (SESSIONID = 1), (DATABASE = sample), (DRDAID = ????????.????-593347788302007473{277}), End compiling prepared statement: EXECUTE STATEMENT SYS."getSchemas" :End prepared statement
+Sat May 07 08:54:22 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 168), (SESSIONID = 1), (DATABASE = sample), (DRDAID = ????????.????-593347788302007473{277}), Begin compiling prepared statement: SELECT SCHEMANAME AS TABLE_SCHEM, CAST(NULL AS VARCHAR(128)) AS TABLE_CATALOG FROM SYS.SYSSCHEMAS WHERE ((1=1) OR ? IS NOT NULL) AND SCHEMANAME LIKE ? ORDER BY TABLE_SCHEM :End prepared statement
+Sat May 07 08:54:23 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 168), (SESSIONID = 1), (DATABASE = sample), (DRDAID = ????????.????-593347788302007473{277}), End compiling prepared statement: SELECT SCHEMANAME AS TABLE_SCHEM, CAST(NULL AS VARCHAR(128)) AS TABLE_CATALOG FROM SYS.SYSSCHEMAS WHERE ((1=1) OR ? IS NOT NULL) AND SCHEMANAME LIKE ? ORDER BY TABLE_SCHEM :End prepared statement
+Sat May 07 08:54:23 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 168), (SESSIONID = 1), (DATABASE = sample), (DRDAID = ????????.????-593347788302007473{277}), Executing prepared statement: EXECUTE STATEMENT SYS."getSchemas" :End prepared statement with 2 parameters begin parameter #1: % :end parameter begin parameter #2: % :end parameter 
+Sat May 07 08:54:23 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 168), (SESSIONID = 1), (DATABASE = sample), (DRDAID = ????????.????-593347788302007473{277}), Committing
+Sat May 07 08:54:23 CEST 2016 Thread[DRDAConnThread_2,5,derby.daemons] (XID = 168), (SESSIONID = 1), (DATABASE = sample), (DRDAID = ????????.????-593347788302007473{277}), Committing

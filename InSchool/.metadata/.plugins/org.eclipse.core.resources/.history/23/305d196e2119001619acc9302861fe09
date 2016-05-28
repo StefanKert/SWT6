@@ -1,0 +1,57 @@
+package swt6.spring.worklog.logic;
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
+
+import swt6.spring.worklog.dao.EmployeeRepository;
+import swt6.spring.worklog.dao.LogbookEntryRepository;
+import swt6.spring.worklog.domain.Employee;
+import swt6.spring.worklog.domain.LogbookEntry;
+
+@Component("workLog")
+@Transactional
+public class WorklogImpl2 implements WorkLogFacade {
+
+	@Autowired
+	private EmployeeRepository employeeRepository;
+
+	@Autowired
+	private LogbookEntryRepository logbookEntryRepository;
+
+	@Override
+	public Employee syncEmployee(Employee employee) {
+		return employeeRepository.saveAndFlush(employee);
+	}
+
+	@Override
+	public Employee findEmployeeById(Long id) {
+		return employeeRepository.findOne(id);
+	}
+
+	@Override
+	@Transactional(readOnly = true)
+	public List<Employee> findAllEmployees() {
+		return employeeRepository.findAll();
+	}
+
+	@Override
+	public LogbookEntry syncLogbookEntry(LogbookEntry entry) {
+		return logbookEntryRepository.saveAndFlush(entry);
+	}
+
+	@Override
+	public LogbookEntry findLogbookEntryById(Long id) {
+		return logbookEntryRepository.findOne(id);
+	}
+
+	@Override
+	public void deleteWorklogEntryById(Long id) {
+		LogbookEntry entry = logbookEntryRepository.findOne(id);
+		if (entry != null) {
+			logbookEntryRepository.delete(entry);
+		}
+	}
+}

@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layout :: head">
+<title>App Title</title>
+</head>
+
+<body role="document">
+	<div th:replace="layout :: navBar">Navigation Bar</div>
+
+	<div class="container">
+
+		<div class="page-title">
+			<h2>High Score</h2>
+		</div>
+		<div class="col-sm-5">
+			<table class="table">
+				<thead>
+					<tr>
+						<th>Name</th>
+						<th>Points</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="user : ${users}">
+						<td th:text="${user.name}">user</td>
+						<td th:text="${user.points}">0</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+</body>
+</html>

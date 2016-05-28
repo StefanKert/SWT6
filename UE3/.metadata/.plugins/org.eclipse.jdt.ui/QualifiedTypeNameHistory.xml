@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="lombok.Data"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.WebDataBinder"/>
+<fullyQualifiedTypeName name="java.text.SimpleDateFormat"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.InitBinder"/>
+<fullyQualifiedTypeName name="org.springframework.beans.propertyeditors.CustomDateEditor"/>
+<fullyQualifiedTypeName name="org.springframework.web.bind.annotation.PathVariable"/>
+<fullyQualifiedTypeName name="swt6.soccer.domain.Team"/>
+<fullyQualifiedTypeName name="swt6.soccer.domain.SoccerBetSystemUser"/>
+<fullyQualifiedTypeName name="java.time.LocalDate"/>
+<fullyQualifiedTypeName name="javax.persistence.JoinColumn"/>
+<fullyQualifiedTypeName name="swt6.soccer.domain.User"/>
+<fullyQualifiedTypeName name="org.springframework.transaction.annotation.EnableTransactionManagement"/>
+<fullyQualifiedTypeName name="swt6.soccer.domain.Game"/>
+<fullyQualifiedTypeName name="swt6.soccer.domain.Bet"/>
+<fullyQualifiedTypeName name="org.springframework.format.annotation.DateTimeFormat"/>
+<fullyQualifiedTypeName name="java.lang.Comparable"/>
+<fullyQualifiedTypeName name="java.util.Collections"/>
+<fullyQualifiedTypeName name="java.util.stream.Collectors"/>
+<fullyQualifiedTypeName name="swt6.soccer.dao.BetRepository"/>
+<fullyQualifiedTypeName name="swt6.soccer.dao.UserRepository"/>
+<fullyQualifiedTypeName name="swt6.soccer.dao.TeamRepository"/>
+<fullyQualifiedTypeName name="swt6.soccer.dao.GameRepository"/>
+<fullyQualifiedTypeName name="java.util.Date"/>
+<fullyQualifiedTypeName name="swt6.util.DateUtil"/>
+<fullyQualifiedTypeName name="swt6.soccer.config.AppConfig"/>
+<fullyQualifiedTypeName name="org.neo4j.cypher.internal.compiler.v2_2.ast.conditions.collectNodesOfType"/>
+</qualifiedTypeNameHistroy>

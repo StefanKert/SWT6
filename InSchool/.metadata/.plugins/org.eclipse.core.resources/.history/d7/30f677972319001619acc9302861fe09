@@ -1,0 +1,15 @@
+package spring.worklog.web;
+
+import org.springframework.beans.factory.annotation.Autowired;
+
+import swt6.spring.worklog.logic.WorkLogFacade;
+
+public class EmployeeController {
+	@Autowired
+	private WorkLogFacade workLog;
+	
+	@RequestMapping("/employees")
+	public String  list(Model model){
+		List<Employee> employees = this.workLog.findAllEmployees();
+	}
+}
