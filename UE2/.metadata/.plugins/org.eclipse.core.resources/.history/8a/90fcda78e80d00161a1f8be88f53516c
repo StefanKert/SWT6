@@ -1,5 +1,0 @@
-package swt6.orm.domain;
-
-public interface IEntity {
-	long getId();
-}

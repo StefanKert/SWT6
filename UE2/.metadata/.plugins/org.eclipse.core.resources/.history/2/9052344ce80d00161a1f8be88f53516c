@@ -1,7 +1,0 @@
-package swt6.orm.data.hibernate;
-
-import swt6.orm.data.IDataProvider;
-
-public class HibernateDataProvider implements IDataProvider<T> {
-
-}

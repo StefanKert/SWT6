@@ -46,7 +46,7 @@ public abstract class WorkLogManagerIntegrationTest {
 		workLogManager.deleteEmployee(updatedEmployeeInDb);
 	}
 	
-	// This test creats an employee and tests if deleting it, cascades the delete and delets address
+	// This test creates an employee and tests if deleting it, cascades the delete and deletes address
 	@Test
 	public void testDeletingEmployee_ShouldCascadeDeletingAddress() {
 		WorkLogManager workLogManager = getWorkLogManager();
